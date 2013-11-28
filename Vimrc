@@ -69,3 +69,7 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
+" KA: Source a local file, when present
+if filereadable("~/.vim/Vimrc.local")
+  source ~/.vim/Vimrc.local
+endif
