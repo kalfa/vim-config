@@ -4,14 +4,21 @@
 runtime! debian.vim
 
 
-let g:pymode_run = 0
-let g:pymode_lint_checker = "pep8,pylint"
+let g:pymode_run = 1 " <leader>r to run code
+let g:pymode_lint_checker = "pep8,pylint,pyflakes"
+let g:pymode_lint_onfly = 0
 let g:pymode_lint_write = 0
-let g:pymode_rope_autocomplete_map = '<C-n>'
-let g:pymode_folding = 1
 let g:pymode_lint_ignore = "F0401"
-let g:pymode_lint_signs = 0
+let g:pymode_lint_signs = 1
+let g:pymode_rope = 1
+let g:pymode_rope_autocomplete_map = '<C-n>'
+let g:pymode_rope_always_show_complete_menu = 1
+let g:pymode_rope_vim_completion = 1
+let g:pymode_folding = 1
+set foldlevel=2
 let g:pymode_options = 0
+let g:pymode_virutalenv = 1
+let g:pymode_syntax = 1 
 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
@@ -56,7 +63,7 @@ endif
 " differently from regular Vi. They are highly recommended though.
 set showcmd		" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
-set ignorecase		" Do case insensitive matching
+"set ignorecase		" Do case insensitive matching
 "set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 "set autowrite		" Automatically save before commands like :next and :make

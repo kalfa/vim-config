@@ -10,3 +10,9 @@
 [submodule "bundle/pythonhelper"]
 	path = bundle/pythonhelper
 	url = https://github.com/vim-scripts/pythonhelper.git
+[submodule "bundle/vim-pyunit"]
+	path = bundle/vim-pyunit
+	url = https://github.com/nvie/vim-pyunit.git
+[submodule "bundle/perforce"]
+	path = bundle/perforce
+	url = https://github.com/vim-scripts/perforce.vim
