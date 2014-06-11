@@ -5,20 +5,21 @@ runtime! debian.vim
 
 
 let g:pymode_run = 1 " <leader>r to run code
-let g:pymode_lint_checker = "pep8,pylint,pyflakes"
+let g:pymode_lint_checker = "pep8,pylint,mccabe"
 let g:pymode_lint_onfly = 0
-let g:pymode_lint_write = 0
+let g:pymode_lint_on_write = 0
 let g:pymode_lint_ignore = "F0401"
 let g:pymode_lint_signs = 1
 let g:pymode_rope = 1
-let g:pymode_rope_autocomplete_map = '<C-n>'
-let g:pymode_rope_always_show_complete_menu = 1
-let g:pymode_rope_vim_completion = 1
+"let g:pymode_rope_completion = 1
+"let g:pymode_rope_complete_on_dot = 1
+let g:pymode_rope_show_doc_bind = '' " empty to unset it
 let g:pymode_folding = 1
-set foldlevel=2
 let g:pymode_options = 0
 let g:pymode_virutalenv = 1
-let g:pymode_syntax = 1 
+let g:pymode_syntax = 1 " disable on slow HW
+let g:pymode_syntax_all = 1
+set foldlevel=2
 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
