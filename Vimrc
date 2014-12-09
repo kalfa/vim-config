@@ -5,7 +5,7 @@ runtime! debian.vim
 
 
 let g:pymode_run = 1 " <leader>r to run code
-let g:pymode_lint_checker = "pep8,pylint,mccabe"
+"let g:pymode_lint_checkers = ['pep8', 'pyflakes']
 let g:pymode_lint_onfly = 0
 let g:pymode_lint_on_write = 0
 let g:pymode_lint_ignore = "F0401"
