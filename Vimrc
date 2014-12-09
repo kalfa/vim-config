@@ -4,15 +4,30 @@
 runtime! debian.vim
 
 
+"let g:pymode_run = 1 " <leader>r to run code
+"let g:pymode_lint_checker = "pep8,pylint,pyflakes"
+"let g:pymode_lint_onfly = 0
+"let g:pymode_lint_write = 0
+"let g:pymode_lint_ignore = "F0401"
+"let g:pymode_lint_signs = 1
+"let g:pymode_rope = 1
+"let g:pymode_rope_autocomplete_map = '<C-n>'
+"let g:pymode_rope_always_show_complete_menu = 1
+"let g:pymode_rope_vim_completion = 1
+"let g:pymode_folding = 1
+"let g:pymode_options = 0
+"let g:pymode_virutalenv = 1
+"let g:pymode_syntax = 1
+
 let g:pymode_run = 1 " <leader>r to run code
 "let g:pymode_lint_checkers = ['pep8', 'pyflakes']
 let g:pymode_lint_onfly = 0
 let g:pymode_lint_on_write = 0
 let g:pymode_lint_ignore = "F0401"
 let g:pymode_lint_signs = 1
-let g:pymode_rope = 1
+let g:pymode_rope = 0
 "let g:pymode_rope_completion = 1
-"let g:pymode_rope_complete_on_dot = 1
+let g:pymode_rope_complete_on_dot = 0
 let g:pymode_rope_show_doc_bind = '' " empty to unset it
 let g:pymode_folding = 1
 let g:pymode_options = 0
@@ -24,7 +39,6 @@ set foldlevel=2
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 execute pathogen#helptags()
-
 
 " All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
 " /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
@@ -68,7 +82,7 @@ set showmatch		" Show matching brackets.
 "set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 "set autowrite		" Automatically save before commands like :next and :make
-"set hidden		" Hide buffers when they are abandoned
+set hidden		" Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes)
 
 
