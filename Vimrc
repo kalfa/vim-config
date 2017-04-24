@@ -2,7 +2,8 @@
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
-
+set modeline
+set modelines=5
 
 "let g:pymode_run = 1 " <leader>r to run code
 "let g:pymode_lint_checker = "pep8,pylint,pyflakes"
@@ -20,10 +21,12 @@ runtime! debian.vim
 "let g:pymode_syntax = 1
 
 let g:pymode_run = 1 " <leader>r to run code
-"let g:pymode_lint_checkers = ['pep8', 'pyflakes']
+let g:pymode_lint_checkers = []
+call add(g:pymode_lint_checkers, 'pep8')
+call add(g:pymode_lint_checkers, 'pylint')
 let g:pymode_lint_onfly = 0
 let g:pymode_lint_on_write = 0
-let g:pymode_lint_ignore = "F0401"
+let g:pymode_lint_ignore = "F0401" " unable to import a module
 let g:pymode_lint_signs = 1
 let g:pymode_rope = 0
 "let g:pymode_rope_completion = 1
@@ -32,10 +35,15 @@ let g:pymode_rope_show_doc_bind = '' " empty to unset it
 let g:pymode_folding = 1
 let g:pymode_options = 0
 let g:pymode_virutalenv = 1
-let g:pymode_syntax = 1 " disable on slow HW
+"let g:pymode_syntax = 1 " disable on slow HW
+"let g:pymode_syntax_slow_sync = 1 " disable on slow HW
 let g:pymode_syntax_all = 1
+
 set foldlevel=2
 
+" disable some plugings before loading pathogen
+let g:pathogen_disabled = []
+" call add(g:pathogen_disabled, 'vim-pyunit') " not currently used
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 execute pathogen#helptags()
@@ -85,6 +93,10 @@ set incsearch		" Incremental search
 set hidden		" Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes)
 
+nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+nnoremap <leader>l :call ToggleLocationList()<CR>
+
+
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -95,3 +107,23 @@ endif
 if filereadable($HOME."/.vim/Vimrc.local")
   source $HOME/.vim/Vimrc.local
 endif
+
+" using cscope.vim to show current function/class in statusline
+let g:ctags_path='/usr/bin/ctags-exuberant'
+autocmd FileType c,cpp let g:ctags_args="--c++-kinds=+pmef --fields=+iaS --extra=+q --language-force=C++"
+let g:ctags_statusline=1
+let g:ctags_title=0
+let g:ctags_regenerate=1
+let generate_tags=1
+
+" statusline: See also pythonhelper plugin which tries (disabled now) to set it for python
+" filename
+set statusline=%f
+" fugitive call
+set statusline+=%{fugitive#statusline()}
+" python-helper call
+set statusline+=%{TagInStatusLine()}
+" perforce call
+set statusline+=%=%(%{P4RulerStatus()}\ \ %)
+" line,cursor and percentace of page for current position
+set statusline+=%=%([%l,%c%V]\ %=\ %P%)
