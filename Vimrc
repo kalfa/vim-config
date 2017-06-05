@@ -116,14 +116,26 @@ let g:ctags_title=0
 let g:ctags_regenerate=1
 let generate_tags=1
 
-" statusline: See also pythonhelper plugin which tries (disabled now) to set it for python
-" filename
-set statusline=%f
-" fugitive call
-set statusline+=%{fugitive#statusline()}
-" python-helper call
-set statusline+=%{TagInStatusLine()}
-" perforce call
-set statusline+=%=%(%{P4RulerStatus()}\ \ %)
-" line,cursor and percentace of page for current position
-set statusline+=%=%([%l,%c%V]\ %=\ %P%)
+"" statusline: See also pythonhelper plugin which tries (disabled now) to set it for python
+"" filename
+"set statusline=%f
+"" fugitive call
+"set statusline+=%{fugitive#statusline()}
+"" python-helper call
+"set statusline+=%{TagInStatusLine()}
+"" perforce call
+"set statusline+=%=%(%{P4RulerStatus()}\ \ %)
+"" line,cursor and percentace of page for current position
+"set statusline+=%=%([%l,%c%V]\ %=\ %P%)
+
+" airline conf
+" <https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt>
+let g:airline_theme='simple'
+" Remove 'mode' part from the default airlien section_a statusline
+let g:airline_section_a = airline#section#create_left(['crypt', 'paste', 'spell', 'capslock', 'xkblayout', 'iminsert'])
+let g:airline_section_y = airline#section#create_left([])  " I don't want fileencoding and fileformat
+nmap <F8> :TagbarToggle<CR>
+"set noshowmode " hide the mode since airline has it already in the statusline
+" enable tabbar for airline
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline_powerline_fonts = 1
