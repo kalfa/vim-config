@@ -20,6 +20,9 @@ set modelines=5
 "let g:pymode_virutalenv = 1
 "let g:pymode_syntax = 1
 
+let g:pathogen_disabled = []
+call add(g:pathogen_disabled, 'pymode')
+
 let g:pymode_run = 1 " <leader>r to run code
 let g:pymode_lint_checkers = []
 call add(g:pymode_lint_checkers, 'pep8')
@@ -139,3 +142,4 @@ nmap <F8> :TagbarToggle<CR>
 " enable tabbar for airline
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tagbar#flags = 'f'

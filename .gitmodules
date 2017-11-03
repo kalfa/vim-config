@@ -40,3 +40,12 @@
 [submodule "bundle/vimagit"]
 	path = bundle/vimagit
 	url = https://github.com/jreybert/vimagit
+[submodule "bundle/robotframework-vim"]
+	path = bundle/robotframework-vim
+	url = https://github.com/mfukar/robotframework-vim.git
+[submodule "bundle/jedi-vim"]
+	path = bundle/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim.git
+[submodule "bundle/vim-terraform"]
+	path = bundle/vim-terraform
+	url = https://github.com/hashivim/vim-terraform.git
