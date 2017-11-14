@@ -5,54 +5,18 @@ runtime! debian.vim
 set modeline
 set modelines=5
 
-"let g:pymode_run = 1 " <leader>r to run code
-"let g:pymode_lint_checker = "pep8,pylint,pyflakes"
-"let g:pymode_lint_onfly = 0
-"let g:pymode_lint_write = 0
-"let g:pymode_lint_ignore = "F0401"
-"let g:pymode_lint_signs = 1
-"let g:pymode_rope = 1
-"let g:pymode_rope_autocomplete_map = '<C-n>'
-"let g:pymode_rope_always_show_complete_menu = 1
-"let g:pymode_rope_vim_completion = 1
-"let g:pymode_folding = 1
-"let g:pymode_options = 0
-"let g:pymode_virutalenv = 1
-"let g:pymode_syntax = 1
-
-let g:pathogen_disabled = []
-"call add(g:pathogen_disabled, 'pymode')
-call add(g:pathogen_disabled, 'python-helper')
-
-let g:pymode_run = 1 " <leader>r to run code
-let g:pymode_lint_checkers = []
-call add(g:pymode_lint_checkers, 'pep8')
-call add(g:pymode_lint_checkers, 'pylint')
-let g:pymode_lint_onfly = 0
-let g:pymode_lint_on_write = 0
-"let g:pymode_lint_ignore = "F0401" " unable to import a module
-let g:pymode_lint_signs = 1
-let g:pymode_motion = 1  " Enable vim-motions for python (C and M)
-let g:pymode_rope = 0
-"let g:pymode_rope_completion = 1
-let g:pymode_rope_complete_on_dot = 0
-let g:pymode_rope_show_doc_bind = '' " empty to unset it
-let g:pymode_indent = 1  " enable PEP8 indentation
-let g:pymode_folding = 1
-let g:pymode_options = 0
-let g:pymode_virutalenv = 1
-"let g:pymode_syntax = 1 " disable on slow HW
-"let g:pymode_syntax_slow_sync = 1 " disable on slow HW
-let g:pymode_syntax_all = 1
-
-set foldlevel=2
-
 " disable some plugings before loading pathogen
 let g:pathogen_disabled = []
-" call add(g:pathogen_disabled, 'vim-pyunit') " not currently used
+"call add(g:pathogen_disabled, 'vim-pyunit') " not currently used
+"call add(g:pathogen_disabled, 'python-mode')
+"call add(g:pathogen_disabled, 'ale')
+call add(g:pathogen_disabled, 'python-helper')
+call add(g:pathogen_disabled, 'powerline')
+
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 execute pathogen#helptags()
+
 
 " All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
 " /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
@@ -99,11 +63,6 @@ set incsearch		" Incremental search
 set hidden		" Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes)
 
-" cscope
-"nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-"nnoremap <leader>l :call ToggleLocationList()<CR>
-
-
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -116,9 +75,12 @@ if filereadable($HOME."/.vim/Vimrc.local")
 endif
 
 " using cscope.vim to show current function/class in statusline
+" see http://www.vim.org/scripts/script.php?script_id=4082
+"nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+"nnoremap <leader>l :call ToggleLocationList()<CR>
 let g:ctags_path='/usr/bin/ctags-exuberant'
 autocmd FileType c,cpp let g:ctags_args="--c++-kinds=+pmef --fields=+iaS --extra=+q --language-force=C++"
-let g:ctags_statusline=1
+let g:ctags_statusline=0
 let g:ctags_title=0
 let g:ctags_regenerate=1
 let generate_tags=1
@@ -134,16 +96,12 @@ let generate_tags=1
 "set statusline+=%=%(%{P4RulerStatus()}\ \ %)
 "" line,cursor and percentace of page for current position
 "set statusline+=%=%([%l,%c%V]\ %=\ %P%)
-
-" airline conf
-" <https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt>
-let g:airline_theme='simple'
-" Remove 'mode' part from the default airline section_a statusline
-let g:airline_section_a = airline#section#create_left(['crypt', 'paste', 'keymap', 'spell', 'capslock', 'xkblayout', 'iminsert'])
-let g:airline_section_y = airline#section#create_left([])  " I don't want fileencoding and fileformat
-nmap <F8> :TagbarToggle<CR>
-"set noshowmode " hide the mode since airline has it already in the statusline
-" enable tabbar for airline
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tagbar#flags = 'f'
+"
+"
+" After pathogen has been initialised
+if filereadable($HOME."/.vim/Vimrc.ale.vim")
+  source $HOME/.vim/Vimrc.ale.vim
+endif
+if filereadable($HOME."/.vim/Vimrc.airline.vim")
+  source $HOME/.vim/Vimrc.airline.vim
+endif
