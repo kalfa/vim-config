@@ -21,7 +21,8 @@ set modelines=5
 "let g:pymode_syntax = 1
 
 let g:pathogen_disabled = []
-call add(g:pathogen_disabled, 'pymode')
+"call add(g:pathogen_disabled, 'pymode')
+call add(g:pathogen_disabled, 'python-helper')
 
 let g:pymode_run = 1 " <leader>r to run code
 let g:pymode_lint_checkers = []
@@ -29,12 +30,14 @@ call add(g:pymode_lint_checkers, 'pep8')
 call add(g:pymode_lint_checkers, 'pylint')
 let g:pymode_lint_onfly = 0
 let g:pymode_lint_on_write = 0
-let g:pymode_lint_ignore = "F0401" " unable to import a module
+"let g:pymode_lint_ignore = "F0401" " unable to import a module
 let g:pymode_lint_signs = 1
+let g:pymode_motion = 1  " Enable vim-motions for python (C and M)
 let g:pymode_rope = 0
 "let g:pymode_rope_completion = 1
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_rope_show_doc_bind = '' " empty to unset it
+let g:pymode_indent = 1  " enable PEP8 indentation
 let g:pymode_folding = 1
 let g:pymode_options = 0
 let g:pymode_virutalenv = 1
@@ -96,8 +99,9 @@ set incsearch		" Incremental search
 set hidden		" Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes)
 
-nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-nnoremap <leader>l :call ToggleLocationList()<CR>
+" cscope
+"nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+"nnoremap <leader>l :call ToggleLocationList()<CR>
 
 
 
@@ -134,8 +138,8 @@ let generate_tags=1
 " airline conf
 " <https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt>
 let g:airline_theme='simple'
-" Remove 'mode' part from the default airlien section_a statusline
-let g:airline_section_a = airline#section#create_left(['crypt', 'paste', 'spell', 'capslock', 'xkblayout', 'iminsert'])
+" Remove 'mode' part from the default airline section_a statusline
+let g:airline_section_a = airline#section#create_left(['crypt', 'paste', 'keymap', 'spell', 'capslock', 'xkblayout', 'iminsert'])
 let g:airline_section_y = airline#section#create_left([])  " I don't want fileencoding and fileformat
 nmap <F8> :TagbarToggle<CR>
 "set noshowmode " hide the mode since airline has it already in the statusline
