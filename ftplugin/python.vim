@@ -36,7 +36,7 @@ if globpath(&runtimepath, 'plugin/ale.vim', 1) != ''
 endif
 
 
-if globpath(&runtimepath, 'tplugin/python/pytest.vim', 1) != ''
+if globpath(&runtimepath, 'ftplugin/python/pytest.vim', 1) != ''
   nmap <silent><Leader>tF <Esc>:Pytest file<CR>
   nmap <silent><Leader>tf <Esc>:Pytest function<CR>
 endif
