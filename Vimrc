@@ -5,13 +5,17 @@ runtime! debian.vim
 set modeline
 set modelines=5
 
+set backspace=2
+
 " disable some plugings before loading pathogen
 let g:pathogen_disabled = []
+call add(g:pathogen_disabled, 'tmuxline') " not currently used
 "call add(g:pathogen_disabled, 'vim-pyunit') " not currently used
+"call add(g:pathogen_disabled, 'jedi-vim')
 "call add(g:pathogen_disabled, 'python-mode')
 "call add(g:pathogen_disabled, 'ale')
-call add(g:pathogen_disabled, 'python-helper')
-call add(g:pathogen_disabled, 'powerline')
+"call add(g:pathogen_disabled, 'pythonhelper')
+"call add(g:pathogen_disabled, 'ctags')
 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
@@ -78,7 +82,7 @@ endif
 " see http://www.vim.org/scripts/script.php?script_id=4082
 "nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 "nnoremap <leader>l :call ToggleLocationList()<CR>
-let g:ctags_path='/usr/bin/ctags-exuberant'
+let g:ctags_path='/usr/bin/ctags'
 autocmd FileType c,cpp let g:ctags_args="--c++-kinds=+pmef --fields=+iaS --extra=+q --language-force=C++"
 let g:ctags_statusline=0
 let g:ctags_title=0
@@ -96,12 +100,15 @@ let generate_tags=1
 "set statusline+=%=%(%{P4RulerStatus()}\ \ %)
 "" line,cursor and percentace of page for current position
 "set statusline+=%=%([%l,%c%V]\ %=\ %P%)
-"
-"
+
+
 " After pathogen has been initialised
 if filereadable($HOME."/.vim/Vimrc.ale.vim")
   source $HOME/.vim/Vimrc.ale.vim
 endif
+
 if filereadable($HOME."/.vim/Vimrc.airline.vim")
   source $HOME/.vim/Vimrc.airline.vim
 endif
+
+" vim: set ft=vim:
