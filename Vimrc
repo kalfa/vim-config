@@ -11,7 +11,7 @@ set backspace=2
 let g:pathogen_disabled = []
 call add(g:pathogen_disabled, 'tmuxline') " not currently used
 "call add(g:pathogen_disabled, 'vim-pyunit') " not currently used
-"call add(g:pathogen_disabled, 'jedi-vim')
+call add(g:pathogen_disabled, 'jedi-vim')
 "call add(g:pathogen_disabled, 'python-mode')
 "call add(g:pathogen_disabled, 'ale')
 "call add(g:pathogen_disabled, 'pythonhelper')
@@ -82,8 +82,8 @@ endif
 " see http://www.vim.org/scripts/script.php?script_id=4082
 "nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 "nnoremap <leader>l :call ToggleLocationList()<CR>
-let g:ctags_path='/usr/bin/ctags'
 autocmd FileType c,cpp let g:ctags_args="--c++-kinds=+pmef --fields=+iaS --extra=+q --language-force=C++"
+" ctags_path in Vimrc.local
 let g:ctags_statusline=0
 let g:ctags_title=0
 let g:ctags_regenerate=1

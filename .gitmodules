@@ -61,3 +61,6 @@
 [submodule "bundle/pytest.git"]
 	path = bundle/pytest.git
 	url = https://github.com/alfredodeza/pytest.vim.git
+[submodule "bundle/youcompleteme"]
+	path = bundle/youcompleteme
+	url = https://github.com/Valloric/YouCompleteMe.git
