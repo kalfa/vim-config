@@ -24,25 +24,14 @@ if globpath(&runtimepath, 'plugin/ale.vim', 1) != ''
   let b:ale_enabled = 1
   let g:ale_lint_on_save = 1
   let g:ale_sign_column_always = 1
-  let g:ale_lint_delay = 1000 " millisecs
-  " possible values: never, always, insert, normal
-  let g:ale_lint_on_text_changed = "always"
-  "augroup ALE
-  "  au BufReadPre,BufNewFile *.py :ALEEnableBuffer
-  "augroup END
-  
-  "let b:ale_linters = ['mypy', 
-  "			\ 'pylint',
-  "			\ 'prospector',
-  "			\ 'pycodestyle',
-  "			\ 'pyls'
-  "			\ ]
+
   let b:ale_fixers = ['autopep8', 
-  			\ 'add_blank_lines_for_python_control_statements',
-  			\ 'isort',
-  			\ 'remove_trailing_lines',
-  			\ 'trim_whitespace',
-  			\ ]
+                          \ 'add_blank_lines_for_python_control_statements',
+                          \ 'isort',
+			  \ 'remove_trailing_lines',
+                          \ 'trim_whitespace',
+                          \ 'yapf',
+                          \ ]
   let b:ale_python_mypy_options='--ignore-missing-imports'
 endif
 
