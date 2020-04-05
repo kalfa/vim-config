@@ -1,7 +1,7 @@
 " NOTE(KA): Have it loaded before pathogen
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
+"runtime! debian.vim
 set modeline
 set modelines=5
 
@@ -16,6 +16,7 @@ call add(g:pathogen_disabled, 'jedi-vim')
 "call add(g:pathogen_disabled, 'ale')
 "call add(g:pathogen_disabled, 'pythonhelper')
 "call add(g:pathogen_disabled, 'ctags')
+"call add(g:pathogen_disabled, 'vim-airline')
 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
@@ -107,9 +108,18 @@ let generate_tags=1
 if filereadable($HOME."/.vim/Vimrc.ale.vim")
   source $HOME/.vim/Vimrc.ale.vim
 endif
-
 if filereadable($HOME."/.vim/Vimrc.airline.vim")
   source $HOME/.vim/Vimrc.airline.vim
 endif
+
+nmap <F8> :TagbarToggle<CR>
+
+"" FastFold plugin, to speed up pymode when folding is on 
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  [] "'x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+"" end of FastFold plugin
+
 
 " vim: set ft=vim:
