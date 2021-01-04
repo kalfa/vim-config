@@ -1,0 +1,6 @@
+" vim:set ft=vim:
+let g:ctags_path='/usr/bin/ctags'
+if !empty($VIRTUAL_ENV)
+	set tags+=$VIRTUAL_ENV/../src/tags
+	set tags+=$VIRTUAL_ENV/src/tags
+endif

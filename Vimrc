@@ -1,125 +1,59 @@
-" NOTE(KA): Have it loaded before pathogen
-" This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages available in Debian.
-"runtime! debian.vim
 set modeline
 set modelines=5
 
-set backspace=2
+"set backspace=2
 
-" disable some plugings before loading pathogen
-let g:pathogen_disabled = []
-call add(g:pathogen_disabled, 'tmuxline') " not currently used
-"call add(g:pathogen_disabled, 'vim-pyunit') " not currently used
-call add(g:pathogen_disabled, 'jedi-vim')
-"call add(g:pathogen_disabled, 'python-mode')
-"call add(g:pathogen_disabled, 'ale')
-"call add(g:pathogen_disabled, 'pythonhelper')
-"call add(g:pathogen_disabled, 'ctags')
-"call add(g:pathogen_disabled, 'vim-airline')
+function ConfigurePlugin(name)
+	autocmd! User a:name execute "source " . GetConfFileName(a:name)
+endfunction
 
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-execute pathogen#helptags()
+function GetConfFileName(name)
+	return "~/.vim/Vimrc." . a:name . ".vim"
+endfunction
 
+" https://github.com/junegunn/vim-plug
+call plug#begin('~/.vim/plugged')
+Plug 'w0rp/ale', {'for': ['python', 'c', 'sh']}
+autocmd! User ale execute "source " . GetConfFileName('ale')
+"Plug 'konfekt/fastfold'
+"autocmd! User fastfold.vim source ~/.vim/Vimrc.fastfold.vim
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Plug 'plytophogy/vim-virtualenv'
+Plug 'airblade/vim-gitgutter'
+Plug 'alvan/vim-closetag', {'for': ['html', 'xhtml', 'xml']}
+Plug 'vim-scripts/ctags.vim', {'for': ['python', 'c', 'cpp']}
+autocmd! User ctags.vim execute "source " . GetConfFileName('ctags')
+Plug 'alfredodeza/pytest.vim', {'for': 'python'}
+Plug 'mgedmin/pythonhelper.vim', {'for': 'python'}
+"Plug 'python-mode/python-mode', {'for': 'python'}
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+" airline
+Plug 'vim-airline/vim-airline'
+autocmd! User airline execute "source " . GetConfFileName('airline')
+Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
+Plug 'majutsushi/tagbar'
 
-" All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
-" /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
-" you can find below.  If you wish to change any of those settings, you should
-" do it in this file (/etc/vim/vimrc), since debian.vim will be overwritten
-" everytime an upgrade of the vim packages is performed.  It is recommended to
-" make changes after sourcing debian.vim since it alters the value of the
-" 'compatible' option.
+" Other pluging I had with pathogen
+" FastFold
+" jedi-vim
+" robotframework-vim
+" vim-puppet
+" vim-terraform
+" vimagit
+call plug#end()
+" PlugInstall
 
-
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
-
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
-syntax on
-
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-set background=dark
-
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
+" Vim jump to the last position whenreopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-if has("autocmd")
-  filetype plugin indent on
-endif
 
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-set showcmd		" Show (partial) command in status line.
-set showmatch		" Show matching brackets.
-"set ignorecase		" Do case insensitive matching
-"set smartcase		" Do smart case matching
-set incsearch		" Incremental search
-"set autowrite		" Automatically save before commands like :next and :make
-set hidden		" Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes)
-
-
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
-endif
-
-" KA: Source a local file, when present
-if filereadable($HOME."/.vim/Vimrc.local")
-  source $HOME/.vim/Vimrc.local
-endif
-
-" using cscope.vim to show current function/class in statusline
-" see http://www.vim.org/scripts/script.php?script_id=4082
-"nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-"nnoremap <leader>l :call ToggleLocationList()<CR>
-" ctags_path in Vimrc.local
-autocmd FileType c,cpp let g:ctags_args="--c++-kinds=+pmef --fields=+iaS --extra=+q --language-force=C++"
-autocmd FileType py let g:ctags_args="--python-kinds=-i --language-force=Python"
-let g:ctags_statusline=0
-let g:ctags_title=0
-let g:ctags_regenerate=1
-let generate_tags=1
-
-"" statusline: See also pythonhelper plugin which tries (disabled now) to set it for python
-"" filename
-"set statusline=%f
-"" fugitive call
-"set statusline+=%{fugitive#statusline()}
-"" python-helper call
-"set statusline+=%{TagInStatusLine()}
-"" perforce call
-"set statusline+=%=%(%{P4RulerStatus()}\ \ %)
-"" line,cursor and percentace of page for current position
-"set statusline+=%=%([%l,%c%V]\ %=\ %P%)
-
-
-" After pathogen has been initialised
-if filereadable($HOME."/.vim/Vimrc.ale.vim")
-  source $HOME/.vim/Vimrc.ale.vim
-endif
-if filereadable($HOME."/.vim/Vimrc.airline.vim")
-  source $HOME/.vim/Vimrc.airline.vim
-endif
+source ~/.vim/Vimrc.airline.vim
 
 nmap <F8> :TagbarToggle<CR>
-
-"" FastFold plugin, to speed up pymode when folding is on 
-nmap zuz <Plug>(FastFoldUpdate)
-let g:fastfold_savehook = 1
-let g:fastfold_fold_command_suffixes =  [] "'x','X','a','A','o','O','c','C']
-let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
-"" end of FastFold plugin
-
-
-" vim: set ft=vim:
